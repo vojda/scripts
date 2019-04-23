@@ -34,7 +34,7 @@ fi
 #echo "$DIFF_WARN"
 #echo "$DIFF_CRIT"
 
-#Compare dates
+#Compare dates.
 
 if [ "$DIFF_CRIT" -ge "$DIFF_DATE" ]
 	then
