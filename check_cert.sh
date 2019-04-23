@@ -7,13 +7,13 @@
 ##################################################################
 
 HOST=$1
-MDY=$(curl --insecure -v https://"$HOST" 2>&1 | grep "expire date" | cut -f 2- -d ":" | awk '{print $1,$2,$4}')
-MDHY=$(curl --insecure -v https://"$HOST" 2>&1 | grep "expire date" | cut -f 2- -d ":")
-EXPIRE_DATE=$(date -d "$MDY" +'%s')
-CURRENT_DATE=$(date "+%s")
+MDY=$(/usr/bin/curl --insecure -v https://"$HOST" 2>&1 | grep "expire date" | cut -f 2- -d ":" | awk '{print $1,$2,$4}')
+MDHY=$(/usr/bin/curl --insecure -v https://"$HOST" 2>&1 | grep "expire date" | cut -f 2- -d ":")
+EXPIRE_DATE=$(/usr/bin/date -d "$MDY" +'%s')
+CURRENT_DATE=$(/usr/bin/date "+%s")
 DIFF_DATE=$((($EXPIRE_DATE-$CURRENT_DATE)/(3600*24)))
-WDATE=$(date -d "$MDY -$2 days" +'%s')
-CDATE=$(date -d "$MDY -$3 days" +'%s')
+WDATE=$(/usr/bin/date -d "$MDY -$2 days" +'%s')
+CDATE=$(/usr/bin/date -d "$MDY -$3 days" +'%s')
 DIFF_WARN=$((($EXPIRE_DATE-$WDATE)/(3600*24)))
 DIFF_CRIT=$((($EXPIRE_DATE-$CDATE)/(3600*24)))
 
